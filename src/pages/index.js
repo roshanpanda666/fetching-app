@@ -61,7 +61,7 @@ const Index = () => {
       <button className='border-2 -mt-7' onClick={fileLoader}>load feedback</button>
       
       <ul>
-          {feedbackitem.map(item => <li>{item.text}</li>)}
+          {feedbackitem.map(item => <li>{item.id} {item.email}---{item.text}</li>)}
       </ul>
     </div>
   )
