@@ -21,6 +21,9 @@ if(req.method === 'POST'){
   res.status(201).json({ massage: 'success',feedback:newFeedback })
 }
 else{
-  res.status(200).json({ name: 'roshan panda' })
+  const filepath = path.join(process.cwd(),'data','feedback.json')
+  const filedata=fs.readFileSync(filepath)
+  const data =  JSON.parse(filedata)
+  res.status(200).json({ feedback:data })
 }
  }

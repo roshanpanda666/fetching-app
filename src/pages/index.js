@@ -4,6 +4,7 @@ const Index = () => {
   const EmailInput=useRef()
   const CommentInput=useRef()
   const[empty,full]=useState("")
+  const [feedbackitem,setfeedbackitem] =useState([])
 
   function submitFormHandler(event){
     event.preventDefault()
@@ -20,8 +21,10 @@ const Index = () => {
       }
 
     })
-    .then((response)=>response.json())
-    .then((data)=>console.log(data))
+    // .then((response)=>response.json())
+    // .then((data)=>console.log(data))
+
+    
 
     if(enteredEmail===""){
       alert("enter the email")
@@ -31,6 +34,14 @@ const Index = () => {
       alert("enter the feedback")
       full("enter the feedback")
     }
+  }
+  function fileLoader() {
+    fetch('/api/hello')
+    .then((response)=>response.json())
+    .then((data)=>{
+      setfeedbackitem(data.feedback)
+    })
+    
   }
   return (
     <div className='flex justify-center items-center flex-col'>
@@ -46,9 +57,12 @@ const Index = () => {
       </div>
       <button className='mt-5 border-2'>submit</button>
       </form>
+      <hr />
+      <button className='border-2 -mt-7' onClick={fileLoader}>load feedback</button>
       
-      
-      
+      <ul>
+          {feedbackitem.map(item => <li>{item.text}</li>)}
+      </ul>
     </div>
   )
 }
